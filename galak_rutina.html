@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0f">
+<title>GÄLAK 2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#0a0a0f}
+body{background:#0a0a0f;color:#f0ede8;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-text-size-adjust:100%;padding-bottom:40px}
+.wrap{background:#0a0a0f;max-width:430px;margin:0 auto;padding:0 16px}
+
+/* HEADER */
+.hdr{padding:60px 0 24px;position:relative}
+.hdr-glow{position:absolute;top:0;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(200,245,60,.13) 0%,transparent 70%);pointer-events:none}
+.hdr-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.4);font-weight:500;margin-bottom:6px;position:relative}
+.hdr-h1{font-family:'Bebas Neue',sans-serif;font-size:58px;line-height:.92;color:#f0ede8;position:relative}
+.hdr-h1 span{color:#c8f53c}
+.hdr-bot{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;position:relative}
+.hdr-sub{font-size:12px;color:rgba(240,237,232,.4);font-weight:300}
+.g-badge{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:#0a0a0f;background:#c8f53c;padding:3px 10px 2px;border-radius:6px}
+
+/* STRIP */
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:20px}
+.pill{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 0 8px;border-radius:50px;border:1px solid rgba(255,255,255,.08);background:#111118;cursor:pointer;transition:all .18s}
+.pill.ga{background:#c8f53c;border-color:#c8f53c}
+.pill.ta{background:#ff5c3a;border-color:#ff5c3a}
+.pill.ra{background:rgba(240,237,232,.1);border-color:rgba(240,237,232,.2)}
+.pday{font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.4)}
+.pill.ga .pday,.pill.ta .pday{color:#0a0a0f}
+.pill.ra .pday{color:#f0ede8}
+.pdot{width:5px;height:5px;border-radius:50%}
+.pdot.gym{background:#c8f53c}.pdot.tennis{background:#ff5c3a}.pdot.rest{background:rgba(240,237,232,.2)}
+.pill.ga .pdot,.pill.ta .pdot{background:#0a0a0f}
+.pill.ra .pdot{background:rgba(240,237,232,.35)}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 16px;border-radius:50px;border:1px solid rgba(255,255,255,.08);background:#111118;font-size:12px;font-weight:500;color:rgba(240,237,232,.45);cursor:pointer;transition:all .18s;white-space:nowrap}
+.tab.on{background:#c8f53c;border-color:#c8f53c;color:#0a0a0f}
+
+/* CARDS */
+.pcard{background:#111118;border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:16px 18px;margin-bottom:14px;display:flex;align-items:flex-start;gap:14px}
+.pico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.pico.gym{background:rgba(200,245,60,.12)}.pico.tennis{background:rgba(255,92,58,.12)}.pico.rest{background:rgba(240,237,232,.06)}
+.ptyp{font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;margin-bottom:4px}
+.ptyp.gym{color:#c8f53c}.ptyp.tennis{color:#ff5c3a}.ptyp.rest{color:rgba(240,237,232,.4)}
+.ptxt{font-size:13px;color:rgba(240,237,232,.5);line-height:1.55;font-weight:300}
+
+.slbl{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.35);margin-bottom:10px;padding-left:2px}
+
+/* EXERCISE */
+.exc{background:#111118;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:13px 15px;margin-bottom:7px;display:flex;align-items:center;gap:13px;position:relative;overflow:hidden}
+.exc.on{border-color:rgba(200,245,60,.2)}
+.exc.off{opacity:.3}
+.eacc{position:absolute;left:0;top:0;bottom:0;width:3px;background:#c8f53c;border-radius:0 2px 2px 0}
+.enum{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1;color:rgba(240,237,232,.2);min-width:22px;text-align:center;flex-shrink:0}
+.exc.on .enum{color:#c8f53c}
+.einf{flex:1;min-width:0}
+.enm{font-size:14px;font-weight:500;color:#f0ede8;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exc.off .enm{color:rgba(240,237,232,.4)}
+.emeta{font-size:11px;color:rgba(240,237,232,.4);font-weight:300}
+.ebadge{font-size:10px;padding:3px 8px;border-radius:50px;font-weight:500;flex-shrink:0;white-space:nowrap}
+.ebadge.on{background:rgba(200,245,60,.12);color:#c8f53c}
+.ebadge.off{background:rgba(255,255,255,.05);color:rgba(240,237,232,.3)}
+
+.div{height:1px;background:rgba(255,255,255,.07);margin:18px 0}
+
+/* BIG */
+.big{background:#111118;border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:36px 24px 32px;text-align:center}
+.bico{font-size:52px;display:block;margin-bottom:14px}
+.btit{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:.04em;margin-bottom:10px}
+.btit.tennis{color:#ff5c3a}.btit.rest{color:rgba(240,237,232,.3)}
+.bsub{font-size:14px;color:rgba(240,237,232,.45);font-weight:300;line-height:1.65;max-width:280px;margin:0 auto}
+
+.tiprow{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.tipdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.tipdot.g{background:#3af5c8}.tipdot.o{background:#ff5c3a}
+.tiptxt{font-size:13px;color:rgba(240,237,232,.5);font-weight:300;line-height:1.5}
+
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fu .28s ease both}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="hdr-glow"></div>
+    <div class="hdr-tag">Programa de entrenamiento</div>
+    <div class="hdr-h1">MI<br><span>RUTINA</span></div>
+    <div class="hdr-bot">
+      <span class="hdr-sub">5 días activos · 3 gym · 2 tenis</span>
+      <span class="g-badge">GÄLAK 2.0</span>
+    </div>
+  </div>
+  <div class="strip" id="strip"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="main"></div>
+  <div style="height:36px"></div>
+</div>
+<script>
+const D=[
+  {s:'LUN',n:'Lunes',t:'gym',f:'Pecho · Hombros · Tríceps',tip:'Empuje de tren superior. Cargas limpias, técnica primero.',ic:'💪',ex:[
+    {n:'Press banca con mancuernas',m:'Compuesto principal · pecho'},
+    {n:'Press inclinado con mancuernas',m:'Compuesto · pecho alto'},
+    {n:'Press militar con mancuernas',m:'Compuesto · hombro anterior'},
+    {n:'Tríceps en polea alta',m:'Aislamiento · tríceps'},
+    {n:'Aperturas en polea baja',m:'Aislamiento · pecho'},
+  ]},
+  {s:'MAR',n:'Martes',t:'tennis',f:'Tenis 10am',tip:'Clase fija. Cardio real, explosividad y coordinación. Sin gym.',ic:'🎾',ex:[]},
+  {s:'MIÉ',n:'Miércoles',t:'gym',f:'Espalda · Bíceps · Core',tip:'Tracción de tren superior. Llegá hidratado — viene de partido.',ic:'🏋️',ex:[
+    {n:'Dominadas o jalón al pecho',m:'Compuesto principal · espalda'},
+    {n:'Remo con barra o mancuerna',m:'Compuesto · espalda media'},
+    {n:'Plancha frontal',m:'Core estabilizador · isométrico'},
+    {n:'Curl de bíceps con barra',m:'Aislamiento · bíceps'},
+    {n:'Curl martillo con mancuernas',m:'Aislamiento · bíceps braquial'},
+  ]},
+  {s:'JUE',n:'Jueves',t:'tennis',f:'Tenis 10am',tip:'Segunda clase fija. Separa los bloques de gym más exigentes.',ic:'🎾',ex:[]},
+  {s:'VIE',n:'Viernes',t:'gym',f:'Piernas · Glúteos',tip:'Piernas completas. Cadena posterior para proteger rodillas.',ic:'🦵',ex:[
+    {n:'Sentadilla con barra o goblet',m:'Compuesto principal · cuádriceps'},
+    {n:'Peso muerto rumano',m:'Cadena posterior · glúteos'},
+    {n:'Prensa de piernas',m:'Cuádriceps · volumen'},
+    {n:'Hip thrust con barra',m:'Glúteo máximo · compuesto'},
+    {n:'Pantorrillas de pie',m:'Aislamiento · gastrocnemios'},
+  ]},
+  {s:'SÁB',n:'Sábado',t:'rest',f:'Descanso activo',tip:'Caminata, stretching, movilidad. Sin carga muscular.',ic:'🌿',ex:[]},
+  {s:'DOM',n:'Domingo',t:'rest',f:'Descanso total',tip:'El músculo crece en el descanso. Este día es parte del entrenamiento.',ic:'💤',ex:[]},
+];
+const W=[
+  {l:'Semana 1',a:4,s:'3 series',r:'10–12 reps',note:'Técnica primero. Cargas livianas. Aprendé cada movimiento.'},
+  {l:'Semana 2',a:4,s:'3 series',r:'10–12 reps',note:'Mismo volumen. Subís carga si la técnica estuvo limpia.'},
+  {l:'Semana 3',a:5,s:'3–4 series',r:'8–12 reps',note:'Quinto ejercicio activado. El cuerpo ya conoce los patrones.'},
+  {l:'Semana 4',a:5,s:'4 series',r:'8–10 reps',note:'Rutina completa. Progresión de carga de acá en adelante.'},
+];
+let sd=0,sw=0;
+
+function rStrip(){
+  document.getElementById('strip').innerHTML=D.map((d,i)=>{
+    const ac=i===sd?(d.t==='gym'?'ga':d.t==='tennis'?'ta':'ra'):'';
+    return`<div class="pill ${ac}" onclick="pd(${i})"><span class="pday">${d.s}</span><span class="pdot ${d.t}"></span></div>`;
+  }).join('');
+}
+function rTabs(){
+  document.getElementById('tabs').innerHTML=W.map((w,i)=>
+    `<div class="tab${i===sw?' on':''}" onclick="pw(${i})">${w.l}</div>`
+  ).join('');
+}
+function rMain(){
+  const day=D[sd],wk=W[sw];
+  let h=`<div class="pcard anim"><div class="pico ${day.t}">${day.ic}</div><div><div class="ptyp ${day.t}">${day.t==='gym'?'GYM':day.t==='tennis'?'TENIS':'DESCANSO'} — ${day.f}</div><div class="ptxt">${day.tip}</div></div></div>`;
+
+  if(day.t==='gym'){
+    h+=`<div class="slbl">Ejercicios · ${wk.s} · ${wk.r}</div>`;
+    day.ex.forEach((e,i)=>{
+      const on=i<wk.a;
+      const sv=(i===0&&wk.s.includes('4'))?'4':'3';
+      h+=`<div class="exc ${on?'on':'off'}">${on?'<div class="eacc"></div>':''}<div class="enum">${i+1}</div><div class="einf"><div class="enm">${e.n}</div><div class="emeta">${on?sv+'×'+wk.r+' · '+e.m.split('·')[0].trim():'Se activa en semana 3'}</div></div><span class="ebadge ${on?'on':'off'}">${on?'ACTIVO':'PENDIENTE'}</span></div>`;
+    });
+    h+=`<div class="div"></div><div class="slbl">Nota · ${wk.l}</div><div class="pcard" style="margin-bottom:0"><div class="pico gym">📈</div><div><div class="ptyp gym">${wk.l.toUpperCase()}</div><div class="ptxt">${wk.note}</div></div></div>`;
+
+  }else if(day.t==='tennis'){
+    h+=`<div class="big anim"><span class="bico">🎾</span><div class="btit tennis">TENIS 10AM</div><div class="bsub">Clase fija. Sin entrenamiento de gym este día.</div></div><div class="div"></div><div class="slbl">Lo que genera el tenis</div>${['Cardio de alta intensidad (HIIT natural)','Explosividad en arranques y frenadas','Carga en hombros, antebrazo y core','Coordinación y tiempo de reacción'].map(t=>`<div class="tiprow"><div class="tipdot o"></div><div class="tiptxt">${t}</div></div>`).join('')}`;
+
+  }else{
+    const ar=day.s==='SÁB';
+    h+=`<div class="big anim"><span class="bico">${day.ic}</span><div class="btit rest">${ar?'DESCANSO ACTIVO':'DESCANSO TOTAL'}</div><div class="bsub">${ar?'Caminata 20–30 min, stretching de caderas y hombros. Sin carga.':'Sin actividad. El músculo crece en el descanso. Este día es obligatorio.'}</div></div>`;
+    if(ar)h+=`<div class="div"></div><div class="slbl">Podés hacer</div>${['Caminata suave 20–30 min','Stretching de isquios, caderas y hombros','Respiración y movilidad articular'].map(t=>`<div class="tiprow"><div class="tipdot g"></div><div class="tiptxt">${t}</div></div>`).join('')}`;
+  }
+  document.getElementById('main').innerHTML=h;
+}
+function pd(i){sd=i;rStrip();rMain()}
+function pw(i){sw=i;rTabs();rMain()}
+rStrip();rTabs();rMain();
+</script>
+</body>
+</html>
